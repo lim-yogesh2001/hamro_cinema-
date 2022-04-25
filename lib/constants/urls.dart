@@ -1,0 +1,30 @@
+const _url = "http://10.0.2.2";
+// const _url = "http://192.168.7.32:3001";
+const baseUrl = "$_url:8000";
+
+const accountsUrl = "$baseUrl/accounts";
+
+const loginUrl = "$accountsUrl/login/";
+const registerUrl = "$accountsUrl/register/";
+const profileUrl = "$accountsUrl/profile/";
+const logoutUrl = "$accountsUrl/logout/";
+const changePasswordUrl = "$accountsUrl/change-password/";
+
+const moviesUrl = "$baseUrl/movies-api";
+
+const movieListUrl = "$moviesUrl/movies/";
+const upcomingMoviesUrl = "$moviesUrl/upcoming-movies/";
+
+const theatersUrl = "$baseUrl/theaters-api";
+const theaterListUrl = "$theatersUrl/theaters/";
+const theaterReviewUrl = "$theatersUrl/reviews/";
+const theaterReviewDetailUrl = "$theatersUrl/reviews-detail/";
+
+const showsUrl = "$baseUrl/shows-api";
+const showsListUrl = "$showsUrl/shows";
+const theaterSeatsUrl = "$showsUrl/seats";
+const reservedSeatsUrl = "$showsUrl/reserved-seats/";
+
+const ticketUrl = "$showsUrl/tickets/";
+
+const bookedTicketUrl = "$showsUrl/transections/";
