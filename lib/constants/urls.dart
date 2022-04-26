@@ -14,11 +14,12 @@ const moviesUrl = "$baseUrl/movies-api";
 
 const movieListUrl = "$moviesUrl/movies/";
 const upcomingMoviesUrl = "$moviesUrl/upcoming-movies/";
+const recommendedMoviesUrl = "$moviesUrl/recommended-movies";
 
 const theatersUrl = "$baseUrl/theaters-api";
 const theaterListUrl = "$theatersUrl/theaters/";
-const theaterReviewUrl = "$theatersUrl/reviews/";
-const theaterReviewDetailUrl = "$theatersUrl/reviews-detail/";
+const theaterReviewUrl = "${theaterListUrl}reviews";
+const theaterReviewDetailUrl = "${theaterListUrl}reviews-detail/";
 
 const showsUrl = "$baseUrl/shows-api";
 const showsListUrl = "$showsUrl/shows";

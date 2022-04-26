@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hamro_cinema/models/shows.dart';
+import 'package:hamro_cinema/providers/review_provider.dart';
 import 'package:hamro_cinema/providers/seat_provider.dart';
 import 'package:hamro_cinema/screens/payment_screen.dart';
 import 'package:hamro_cinema/utils/navigate.dart';
@@ -27,6 +28,8 @@ class SeatsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final future = Provider.of<SeatProvider>(context, listen: false)
         .fetchSeats(theaterId: show.theater.id);
+    final reviewFuture = Provider.of<ReviewProvider>(context, listen: false)
+        .fetchReviews(show.theater.id);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Select Seats"),
@@ -94,6 +97,44 @@ class SeatsScreen extends StatelessWidget {
                         child: const Text("Buy Now"),
                       ),
                     ],
+                  );
+                }),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              FutureBuilder(
+                future: reviewFuture,
+                builder: ((context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  final data =
+                      Provider.of<ReviewProvider>(context, listen: false)
+                          .reviews;
+                  return ListView.builder(
+                    itemBuilder: ((context, index) => Card(
+                            child: ListTile(
+                          title: Text(data[index].comment),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(
+                                Icons.star_outlined,
+                                color: Colors.orange,
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(data[index].ratings.toString())
+                            ],
+                          ),
+                        ))),
+                    itemCount: data.length,
+                    shrinkWrap: true,
+                    primary: false,
                   );
                 }),
               ),

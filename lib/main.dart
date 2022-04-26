@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hamro_cinema/constants/constants.dart';
 import 'package:hamro_cinema/models/movie.dart';
+import 'package:hamro_cinema/providers/review_provider.dart';
 import 'package:hamro_cinema/providers/seat_provider.dart';
 import 'package:hamro_cinema/providers/show_provider.dart';
 import 'package:hamro_cinema/providers/ticket_provider.dart';
@@ -47,6 +48,9 @@ class MyApp extends StatelessWidget {
           ),
           ChangeNotifierProvider(
             create: (_) => TicketProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => ReviewProvider(),
           ),
         ],
         child: MaterialApp(

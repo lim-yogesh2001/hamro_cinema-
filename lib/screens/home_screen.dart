@@ -1,11 +1,16 @@
 import 'dart:convert';
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:hamro_cinema/providers/login_provider.dart';
 import 'package:hamro_cinema/providers/movie_provider.dart';
 import 'package:hamro_cinema/screens/profile_screen.dart';
+import 'package:hamro_cinema/screens/recommended_movies_screen.dart';
 import 'package:hamro_cinema/widgets/general_alert_dialog.dart';
 import 'package:hamro_cinema/widgets/movie_card.dart';
+import 'package:hamro_cinema/widgets/upcoming_movie_card.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '/utils/navigate.dart';
@@ -17,10 +22,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = Provider.of<LoginProvider>(context, listen: false).user;
-    // final future =
-    //     Provider.of<RoomProvider>(context, listen: false).fetchRoom(context);
     final movieFuture =
         Provider.of<MovieProvider>(context, listen: false).fetchMovies();
+    final upcomingMovieFuture =
+        Provider.of<MovieProvider>(context, listen: false)
+            .fetchUpcomingMovies();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Welcome Home!"),
@@ -28,9 +34,6 @@ class HomeScreen extends StatelessWidget {
       drawer: Drawer(
           child: Column(
         children: [
-          // Consumer<UserProvider>(builder: (_, data, __) {
-          //   // data.
-          //   return
           UserAccountsDrawerHeader(
             accountName: Text(data?.user.username ?? "No Name"),
             accountEmail: Text(
@@ -42,13 +45,19 @@ class HomeScreen extends StatelessWidget {
               size: 48,
             ),
           ),
-
           buildListTile(
             context,
             label: "Profile",
             widget: const ProfileScreen(),
           ),
-
+          const SizedBox(
+            height: 8,
+          ),
+          buildListTile(
+            context,
+            label: "Recommended Movies",
+            widget: const RecommendedMoviesScreen(),
+          ),
           const SizedBox(
             height: 8,
           ),
@@ -72,6 +81,81 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      Text(
+                        "Hello! ${data!.user.username}",
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                      // Text(
+                      //   "Hello! ${data!.user.username}",
+                      //   style: Theme.of(context).textTheme.headline6,
+                      // ),
+                    ],
+                  ),
+                  Text(
+                    DateFormat("yyyy MMM dd hh:mm a").format(
+                      DateTime.now(),
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              Text(
+                "Upcoming Movies",
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              FutureBuilder(
+                future: upcomingMovieFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return Consumer<MovieProvider>(
+                    builder: (context, value, child) =>
+                        value.upcomingMovies.isEmpty
+                            ? const SizedBox.shrink()
+                            : CarouselSlider.builder(
+                                itemCount: value.upcomingMovies.length,
+                                itemBuilder: (context, i, index) {
+                                  return UpcomingMovieCard(
+                                    movie: value.upcomingMovies[i],
+                                  );
+                                },
+                                options: CarouselOptions(
+                                  viewportFraction: 0.8,
+                                  autoPlay: true,
+                                  enlargeCenterPage: true,
+                                ),
+                              ),
+                    // GridView.builder(
+                    //   gridDelegate:
+                    //       const SliverGridDelegateWithFixedCrossAxisCount(
+                    //     crossAxisCount: 2,
+                    //     childAspectRatio: 0.75,
+                    //   ),
+                    //   itemBuilder: (_, index) {
+                    //     return MovieCard(
+                    //       movie: value.listOfMovies[index],
+                    //       id: value.listOfMovies[index].id,
+                    //     );
+                    //   },
+                    //   itemCount: value.listOfMovies.length,
+                    //   shrinkWrap: true,
+                    // ),
+                  );
+                },
+              ),
+              const SizedBox(
+                height: 16,
+              ),
               Text(
                 "Now Showing",
                 style: Theme.of(context).textTheme.headline6,

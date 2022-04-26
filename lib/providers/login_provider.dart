@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hamro_cinema/models/profile.dart';
 import 'package:hamro_cinema/models/user.dart';
 import 'package:hamro_cinema/screens/login_screen.dart';
 import 'package:hamro_cinema/utils/navigate.dart';
@@ -10,6 +11,7 @@ import '/constants/urls.dart';
 
 class LoginProvider extends ChangeNotifier {
   User? user;
+  Profile? profile;
   loginUser({
     required String username,
     required String password,
@@ -20,6 +22,9 @@ class LoginProvider extends ChangeNotifier {
       user =
           userFromJson(await APICall().postRequestWithoutToken(loginUrl, map));
       APIClient.token = user!.token;
+      profile = profileFromJson(
+          await APICall().getRequestWithToken("$profileUrl${user!.user.id}"));
+
       notifyListeners();
     } catch (ex) {
       rethrow;
@@ -58,6 +63,30 @@ class LoginProvider extends ChangeNotifier {
       APIClient.token = "";
       user = null;
       navigateAndRemoveAll(context, LoginScreen());
+    } catch (ex) {
+      rethrow;
+    }
+  }
+
+  updateProfile(
+    BuildContext context, {
+    required Map map,
+  }) async {
+    try {
+      GeneralAlertDialog().customLoadingDialog(context);
+      final body = {
+        ...map,
+        "username": profile!.username,
+      };
+      await APICall().postRequestWithToken(
+        "$profileUrl${user!.user.id}/",
+        body,
+        requestType: RequestType.putWithToken,
+      );
+      Navigator.pop(context);
+      profile!.fullName = map["full_name"];
+      profile!.phone = map["phone_number"];
+      notifyListeners();
     } catch (ex) {
       rethrow;
     }

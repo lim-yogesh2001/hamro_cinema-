@@ -20,7 +20,8 @@ class APICall {
       if (_response.statusCode >= 200 || _response.statusCode <= 300) {
         return _response.body;
       }
-      throw jsonDecode(_response.body)["error"];
+      throw jsonDecode(_response.body)["error"] ??
+          jsonDecode(_response.body)["non_field_errors"];
     } catch (ex) {
       rethrow;
     }

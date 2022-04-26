@@ -40,6 +40,7 @@ dependencies:
   cached_network_image: ^3.2.0
   khalti_flutter: ^2.0.2
   intl: ^0.17.0
+  carousel_slider: ^4.1.1
 
 dev_dependencies:
   flutter_test:
