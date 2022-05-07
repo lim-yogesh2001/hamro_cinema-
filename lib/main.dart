@@ -9,6 +9,7 @@ import 'package:hamro_cinema/providers/review_provider.dart';
 import 'package:hamro_cinema/providers/seat_provider.dart';
 import 'package:hamro_cinema/providers/show_provider.dart';
 import 'package:hamro_cinema/providers/ticket_provider.dart';
+import 'package:hamro_cinema/screens/splash_screen.dart';
 import 'package:khalti_flutter/khalti_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -105,7 +106,7 @@ class MyApp extends StatelessWidget {
           navigatorKey: navigatorKey,
           title: 'Hamro Cinema',
           theme: lightTheme(context),
-          home: LoginScreen(),
+          home: const SplashScreen(),
           localizationsDelegates: const [
             KhaltiLocalizations.delegate,
           ],

@@ -28,13 +28,13 @@ class RegisterScreen extends StatelessWidget {
       ),
       backgroundColor: Colors.white,
       body: Padding(
-        padding: EdgeInsets.all(15),
+        padding: const EdgeInsets.all(15),
         child: SingleChildScrollView(
             child: Form(
           key: _formKey,
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               GeneralTextField(
@@ -44,7 +44,7 @@ class RegisterScreen extends StatelessWidget {
                 textInputAction: TextInputAction.next,
                 validate: (value) => ValidationMixin().validateEmail(value!),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               GeneralTextField(
@@ -55,7 +55,7 @@ class RegisterScreen extends StatelessWidget {
                 validate: (value) =>
                     ValidationMixin().validate(value!, "Username"),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               GeneralTextField(
@@ -66,7 +66,7 @@ class RegisterScreen extends StatelessWidget {
                 validate: (value) =>
                     ValidationMixin().validate(value!, "Full Name"),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               GeneralTextField(
@@ -78,7 +78,7 @@ class RegisterScreen extends StatelessWidget {
                 validate: (value) =>
                     ValidationMixin().validate(value!, "Phone Number"),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               GeneralTextField(
@@ -92,7 +92,7 @@ class RegisterScreen extends StatelessWidget {
                   confirmPasswordFocus.requestFocus();
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               GeneralTextField(
                 title: "Confirm Password",
                 isObscure: true,
@@ -108,7 +108,7 @@ class RegisterScreen extends StatelessWidget {
                   submit(context);
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () async {
                   await submit(context);
