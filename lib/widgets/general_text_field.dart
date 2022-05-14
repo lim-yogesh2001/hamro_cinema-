@@ -13,14 +13,14 @@ class GeneralTextField extends StatefulWidget {
     this.isObscure = false,
     Key? key,
     this.maxLength,
-    this.maxLines,
+    this.maxLines = 1,
     this.inputFormatter,
   }) : super(key: key);
 
   final String title;
   final TextEditingController controller;
   final int? maxLength;
-  final int? maxLines;
+  final int maxLines;
   final FocusNode? focusNode;
   final bool isObscure;
   final TextInputType textInputType;
