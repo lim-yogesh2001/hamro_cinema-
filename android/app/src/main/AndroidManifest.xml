@@ -1,5 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hamro_cinema">
+
+    <queries>
+        <!-- If your app makes calls -->
+        <intent>
+          <action android:name="android.intent.action.DIAL" />
+          <data android:scheme="tel" />
+        </intent>
+    </queries>
    <application
         android:label="hamro_cinema"
         android:name="${applicationName}"

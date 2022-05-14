@@ -13,12 +13,14 @@ class GeneralTextField extends StatefulWidget {
     this.isObscure = false,
     Key? key,
     this.maxLength,
+    this.maxLines,
     this.inputFormatter,
   }) : super(key: key);
 
   final String title;
   final TextEditingController controller;
   final int? maxLength;
+  final int? maxLines;
   final FocusNode? focusNode;
   final bool isObscure;
   final TextInputType textInputType;
@@ -47,6 +49,7 @@ class _GeneralTextFieldState extends State<GeneralTextField> {
       focusNode: widget.focusNode,
       obscureText: toHide,
       textInputAction: widget.textInputAction,
+      maxLines: widget.maxLines,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
         suffixIcon: widget.isObscure

@@ -7,7 +7,7 @@ import '/constants/urls.dart';
 class TheaterProvider extends ChangeNotifier {
   List<Theater> listOfTheaters = [];
 
-  fetchEducation() async {
+  fetchTheaters() async {
     try {
       final response = await APICall().getRequestWithToken(theaterListUrl);
       listOfTheaters = theaterFromJson(response);

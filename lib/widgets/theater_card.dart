@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:hamro_cinema/models/shows.dart';
-import 'package:hamro_cinema/screens/seats_screen.dart';
+import 'package:hamro_cinema/models/theater.dart';
+import 'package:hamro_cinema/screens/theater_screen.dart';
 import 'package:hamro_cinema/utils/navigate.dart';
 
-class ShowCard extends StatelessWidget {
-  const ShowCard({
+class TheaterCard extends StatelessWidget {
+  const TheaterCard({
     Key? key,
-    required this.show,
+    required this.theater,
   }) : super(key: key);
 
-  final Show show;
+  final Theater theater;
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +18,14 @@ class ShowCard extends StatelessWidget {
       // onPressed: () {},
       onPressed: () => navigate(
         context,
-        SeatsScreen(
-          show: show,
+        TheaterScreen(
+          theater: theater,
         ),
       ),
       child: Column(
         children: [
           Image.network(
-            show.theater.logo,
+            theater.logo,
             height: size.height * .2,
             width: size.width * .45,
           ),
@@ -33,7 +33,7 @@ class ShowCard extends StatelessWidget {
             height: 8,
           ),
           Text(
-            show.theater.theaterName,
+            theater.theaterName,
             style: const TextStyle(
               fontSize: 14,
               color: Colors.black,

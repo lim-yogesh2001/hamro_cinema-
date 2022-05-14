@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:hamro_cinema/providers/login_provider.dart';
 import 'package:hamro_cinema/providers/movie_provider.dart';
+import 'package:hamro_cinema/screens/list_of_theater_screen.dart';
 import 'package:hamro_cinema/screens/profile_screen.dart';
 import 'package:hamro_cinema/screens/recommended_movies_screen.dart';
 import 'package:hamro_cinema/widgets/general_alert_dialog.dart';
@@ -61,6 +62,14 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
+          buildListTile(
+            context,
+            label: "List of Theaters",
+            widget: const ListOfTheaterScreen(),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
           const Spacer(),
           buildListTile(
             context,
@@ -90,10 +99,6 @@ class HomeScreen extends StatelessWidget {
                         "Hello! ${data!.user.username}",
                         style: Theme.of(context).textTheme.headline6,
                       ),
-                      // Text(
-                      //   "Hello! ${data!.user.username}",
-                      //   style: Theme.of(context).textTheme.headline6,
-                      // ),
                     ],
                   ),
                   Text(

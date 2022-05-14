@@ -8,6 +8,7 @@ import 'package:hamro_cinema/constants/constants.dart';
 import 'package:hamro_cinema/providers/review_provider.dart';
 import 'package:hamro_cinema/providers/seat_provider.dart';
 import 'package:hamro_cinema/providers/show_provider.dart';
+import 'package:hamro_cinema/providers/theater_provider.dart';
 import 'package:hamro_cinema/providers/ticket_provider.dart';
 import 'package:hamro_cinema/screens/splash_screen.dart';
 import 'package:khalti_flutter/khalti_flutter.dart';
@@ -97,6 +98,9 @@ class MyApp extends StatelessWidget {
           ),
           ChangeNotifierProvider(
             create: (_) => TicketProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => TheaterProvider(),
           ),
           ChangeNotifierProvider(
             create: (_) => ReviewProvider(),
