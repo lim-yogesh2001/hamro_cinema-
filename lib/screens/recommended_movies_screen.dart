@@ -41,11 +41,11 @@ class RecommendedMoviesScreen extends StatelessWidget {
                     ),
                     itemBuilder: (_, index) {
                       return MovieCard(
-                        movie: value.listOfMovies[index],
-                        id: value.listOfMovies[index].id,
+                        movie: value.recommendedMovies[index],
+                        id: value.recommendedMovies[index].id,
                       );
                     },
-                    itemCount: value.listOfMovies.length,
+                    itemCount: value.recommendedMovies.length,
                     shrinkWrap: true,
                   ),
                 );

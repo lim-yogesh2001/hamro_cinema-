@@ -33,6 +33,7 @@ class ReviewProvider extends ChangeNotifier {
         "user_id":
             Provider.of<LoginProvider>(context, listen: false).getUserId(),
       };
+      print(body);
       final response =
           await APICall().postRequestWithToken("$theaterReviewUrl/$id/", body);
     } catch (ex) {

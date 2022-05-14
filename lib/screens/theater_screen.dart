@@ -29,6 +29,7 @@ class TheaterScreen extends StatelessWidget {
               try {
                 final map = await showSheet(context);
                 if (map != null) {
+                  print(map);
                   GeneralAlertDialog().customLoadingDialog(context);
                   Provider.of<ReviewProvider>(context, listen: false)
                       .postReview(
@@ -226,7 +227,7 @@ class TheaterScreen extends StatelessWidget {
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
                           Navigator.pop(context, {
-                            "rating": rating,
+                            "ratings": rating,
                             "comment": controller.text,
                           });
                         }
