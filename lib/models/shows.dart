@@ -16,6 +16,7 @@ class Show {
     required this.langauge,
     required this.theater,
     required this.movie,
+    required this.isHouseFull,
   });
 
   final int id;
@@ -24,6 +25,7 @@ class Show {
   final String langauge;
   final Theater theater;
   final Movie movie;
+  final bool isHouseFull;
 
   factory Show.fromJson(Map<String, dynamic> json) => Show(
         id: json["id"],
@@ -32,6 +34,7 @@ class Show {
         langauge: json["langauge"],
         theater: Theater.fromJson(json["theater_id"]),
         movie: Movie.fromJson(json["movie_id"]),
+        isHouseFull: json["isHouseFull"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -42,6 +45,7 @@ class Show {
         "langauge": langauge,
         "theater_id": theater.toJson(),
         "movie_id": movie.toJson(),
+        "isHouseFull": isHouseFull,
       };
 }
 

@@ -28,6 +28,7 @@ class MovieProvider extends ChangeNotifier {
     try {
       if (upcomingMovies.isNotEmpty) return;
       final response = await APICall().getRequestWithToken(upcomingMoviesUrl);
+
       upcomingMovies = movieFromJson(response);
     } catch (ex) {
       log(ex.toString());

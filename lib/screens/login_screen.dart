@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hamro_cinema/providers/weather_provider.dart';
+import 'package:hamro_cinema/screens/forgot_password_screen.dart';
+import 'package:hamro_cinema/utils/navigate.dart';
 import '/providers/login_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +20,7 @@ class LoginScreen extends StatelessWidget {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  static final formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +41,7 @@ class LoginScreen extends StatelessWidget {
                 //   width: SizeConfig.width * 40,
                 //   height: SizeConfig.height * 25,
                 // ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 GeneralTextField(
@@ -49,7 +52,7 @@ class LoginScreen extends StatelessWidget {
                   validate: (value) =>
                       ValidationMixin().validate(value!, "Username"),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 GeneralTextField(
@@ -64,16 +67,28 @@ class LoginScreen extends StatelessWidget {
                     _submit(context, false);
                   },
                 ),
-                SizedBox(height: 16),
+                const SizedBox(
+                  height: 8,
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () => navigate(context, ForgotPasswordScreen()),
+                    child: const Text("Forgot Password?"),
+                  ),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
                 ElevatedButton(
                   onPressed: () {
                     _submit(context, false);
                   },
                   child: const Text("Login"),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 const Text("OR"),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 TextButton(
                   onPressed: () {
                     Navigator.push(
@@ -103,6 +118,8 @@ class LoginScreen extends StatelessWidget {
       dialog.customLoadingDialog(context);
       await Provider.of<LoginProvider>(context, listen: false).loginUser(
           username: usernameController.text, password: passwordController.text);
+      await Provider.of<WeatherProvider>(context, listen: false)
+          .fetchWeatherData();
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(

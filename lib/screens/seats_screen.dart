@@ -36,110 +36,130 @@ class SeatsScreen extends StatelessWidget {
       ),
       body: CurvedBodyWidget(
         widget: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Book a Seat",
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Text(
-                "Show Time: ${DateFormat("yyyy-MMMM-dd").format(show.date)} ${show.showTime}",
-                style: Theme.of(context).textTheme.bodyText2,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              FutureBuilder(
-                future: future,
-                builder: ((context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  final data = Provider.of<SeatProvider>(context, listen: false)
-                      .listOfSeats;
-                  final list = [];
-                  for (var a in data) {
-                    list.add(" Row: ${a.row}, No: ${a.number}");
-                  }
-                  return Column(
+          child: show.isHouseFull
+              ? SizedBox(
+                  height: MediaQuery.of(context).size.height * .75,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      GeneralDropDown(
-                        method: onChanged,
-                        list: list,
+                      Text(
+                        "Houseful!!!",
+                        style: Theme.of(context).textTheme.headline4,
                       ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      ElevatedButton(
-                        onPressed: () async {
-                          if (seatController.text.isNotEmpty) {
-                            await Provider.of<SeatProvider>(context,
-                                    listen: false)
-                                .reserveSeat(
-                              context,
-                              show.id,
-                              int.parse(seatController.text),
-                            );
-                            navigate(
-                              context,
-                              PaymentScreen(
-                                show: show,
-                                seatId: int.parse(seatController.text),
-                              ),
-                            );
-                          }
-                        },
-                        child: const Text("Buy Now"),
+                      Text(
+                        "Sorry, No seats available. :(",
+                        style: Theme.of(context).textTheme.bodyText1,
                       ),
                     ],
-                  );
-                }),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              FutureBuilder(
-                future: reviewFuture,
-                builder: ((context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  final data =
-                      Provider.of<ReviewProvider>(context, listen: false)
-                          .reviews;
-                  return ListView.builder(
-                    itemBuilder: ((context, index) => Card(
-                            child: ListTile(
-                          title: Text(data[index].comment),
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const Icon(
-                                Icons.star_outlined,
-                                color: Colors.orange,
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              Text(data[index].ratings.toString())
-                            ],
-                          ),
-                        ))),
-                    itemCount: data.length,
-                    shrinkWrap: true,
-                    primary: false,
-                  );
-                }),
-              ),
-            ],
-          ),
+                  ),
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Book a Seat",
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Text(
+                      "Show Time: ${DateFormat("yyyy-MMMM-dd").format(show.date)} ${show.showTime}",
+                      style: Theme.of(context).textTheme.bodyText2,
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    FutureBuilder(
+                      future: future,
+                      builder: ((context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        final data =
+                            Provider.of<SeatProvider>(context, listen: false)
+                                .listOfSeats;
+                        final list = [];
+                        for (var a in data) {
+                          list.add(" Row: ${a.row}, No: ${a.number}");
+                        }
+                        return Column(
+                          children: [
+                            GeneralDropDown(
+                              method: onChanged,
+                              list: list,
+                            ),
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            ElevatedButton(
+                              onPressed: () async {
+                                if (seatController.text.isNotEmpty) {
+                                  await Provider.of<SeatProvider>(context,
+                                          listen: false)
+                                      .reserveSeat(
+                                    context,
+                                    show.id,
+                                    int.parse(seatController.text),
+                                  );
+                                  navigate(
+                                    context,
+                                    PaymentScreen(
+                                      show: show,
+                                      seatId: int.parse(seatController.text),
+                                    ),
+                                  );
+                                }
+                              },
+                              child: const Text("Buy Now"),
+                            ),
+                          ],
+                        );
+                      }),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    FutureBuilder(
+                      future: reviewFuture,
+                      builder: ((context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        final data =
+                            Provider.of<ReviewProvider>(context, listen: false)
+                                .reviews;
+                        return ListView.builder(
+                          itemBuilder: ((context, index) => Card(
+                                  child: ListTile(
+                                title: Text(data[index].comment),
+                                trailing: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const Icon(
+                                      Icons.star_outlined,
+                                      color: Colors.orange,
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(data[index].ratings.toString())
+                                  ],
+                                ),
+                              ))),
+                          itemCount: data.length,
+                          shrinkWrap: true,
+                          primary: false,
+                        );
+                      }),
+                    ),
+                  ],
+                ),
         ),
       ),
     );

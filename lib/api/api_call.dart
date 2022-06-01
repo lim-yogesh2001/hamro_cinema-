@@ -17,13 +17,16 @@ class APICall {
         body: body,
       );
       log(_response.body);
-      if (_response.statusCode >= 200 || _response.statusCode <= 300) {
+      log(_response.statusCode.toString());
+      if (_response.statusCode >= 200 && _response.statusCode <= 300) {
         return _response.body;
       }
       throw jsonDecode(_response.body)["error"] ??
-          jsonDecode(_response.body)["non_field_errors"];
+          jsonDecode(_response.body)["non_field_errors"] ??
+          jsonDecode(_response.body)["password"] ??
+          jsonDecode(_response.body)["email"];
     } catch (ex) {
-      rethrow;
+      throw ex.toString().replaceAll("[", "").replaceAll("]", "");
     }
   }
 
@@ -35,7 +38,7 @@ class APICall {
         body: body,
       );
       log(_response.body);
-      if (_response.statusCode >= 200 || _response.statusCode <= 300) {
+      if (_response.statusCode >= 200 && _response.statusCode <= 300) {
         return _response.body;
       }
       throw jsonDecode(_response.body)["error"];
@@ -47,7 +50,7 @@ class APICall {
   getRequestWithToken(String url) async {
     try {
       Response _response = await _callApi(RequestType.getWithToken, url);
-      if (_response.statusCode >= 200 || _response.statusCode <= 300) {
+      if (_response.statusCode >= 200 && _response.statusCode <= 300) {
         return _response.body;
       }
       throw jsonDecode(_response.body)["error"];
@@ -57,6 +60,7 @@ class APICall {
   }
 
   _callApi(RequestType requestType, String url, {Map? body}) async {
+    // debugger();
     if (body != null) {
       return await _client.request(
         requestType: requestType,

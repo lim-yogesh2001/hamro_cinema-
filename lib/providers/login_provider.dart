@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hamro_cinema/models/profile.dart';
 import 'package:hamro_cinema/models/user.dart';
+import 'package:hamro_cinema/screens/confirm_forgot_password_screen.dart';
 import 'package:hamro_cinema/screens/login_screen.dart';
 import 'package:hamro_cinema/utils/navigate.dart';
 import 'package:hamro_cinema/utils/request_type.dart';
 import 'package:hamro_cinema/widgets/general_alert_dialog.dart';
+
 import '/api/api_call.dart';
 import '/api/api_client.dart';
 import '/constants/urls.dart';
@@ -89,6 +91,42 @@ class LoginProvider extends ChangeNotifier {
       notifyListeners();
     } catch (ex) {
       rethrow;
+    }
+  }
+
+  forgotPassword(BuildContext context, {required String email}) async {
+    try {
+      GeneralAlertDialog().customLoadingDialog(context);
+      final body = {
+        "email": email,
+      };
+      await APICall().postRequestWithoutToken(
+        resetPasswordUrl,
+        body,
+      );
+      Navigator.pop(context);
+      navigate(context, ConfirmForgotPasswordScreen());
+    } catch (ex) {
+      Navigator.pop(context);
+      GeneralAlertDialog().customAlertDialog(context, ex.toString());
+    }
+  }
+
+  confirmForgotPassword(BuildContext context,
+      {required String token, required String password}) async {
+    try {
+      GeneralAlertDialog().customLoadingDialog(context);
+      final body = {
+        "token": token,
+        "password": password,
+      };
+      await APICall().postRequestWithoutToken(
+        resetPasswordConfirmUrl,
+        body,
+      );
+      Navigator.pop(context);
+    } catch (ex) {
+      GeneralAlertDialog().customAlertDialog(context, ex.toString());
     }
   }
 }

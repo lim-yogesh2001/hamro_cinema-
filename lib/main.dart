@@ -10,6 +10,7 @@ import 'package:hamro_cinema/providers/seat_provider.dart';
 import 'package:hamro_cinema/providers/show_provider.dart';
 import 'package:hamro_cinema/providers/theater_provider.dart';
 import 'package:hamro_cinema/providers/ticket_provider.dart';
+import 'package:hamro_cinema/providers/weather_provider.dart';
 import 'package:hamro_cinema/screens/splash_screen.dart';
 import 'package:khalti_flutter/khalti_flutter.dart';
 import 'package:provider/provider.dart';
@@ -105,11 +106,15 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(
             create: (_) => ReviewProvider(),
           ),
+          ChangeNotifierProvider(
+            create: (_) => WeatherProvider(),
+          ),
         ],
         child: MaterialApp(
           navigatorKey: navigatorKey,
           title: 'Hamro Cinema',
           theme: lightTheme(context),
+          debugShowCheckedModeBanner: false,
           home: const SplashScreen(),
           localizationsDelegates: const [
             KhaltiLocalizations.delegate,

@@ -9,6 +9,8 @@ const registerUrl = "$accountsUrl/register/";
 const profileUrl = "$accountsUrl/profile/";
 const logoutUrl = "$accountsUrl/logout/";
 const changePasswordUrl = "$accountsUrl/change-password/";
+const resetPasswordUrl = "$accountsUrl/password-reset/";
+const resetPasswordConfirmUrl = "${resetPasswordUrl}confirm/";
 
 const moviesUrl = "$baseUrl/movies-api";
 
@@ -29,3 +31,6 @@ const reservedSeatsUrl = "$showsUrl/reserved-seats/";
 const ticketUrl = "$showsUrl/tickets/";
 
 const bookedTicketUrl = "$showsUrl/transections/";
+
+const weatherApiUrl =
+    "https://api.openweathermap.org/data/2.5/weather?q=Dharan&appid=4bb19a1aa94f357b13812b2109202c58&units=metric";

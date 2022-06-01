@@ -1,21 +1,19 @@
-import 'dart:convert';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:hamro_cinema/providers/login_provider.dart';
-import 'package:hamro_cinema/providers/movie_provider.dart';
-import 'package:hamro_cinema/screens/list_of_theater_screen.dart';
-import 'package:hamro_cinema/screens/profile_screen.dart';
-import 'package:hamro_cinema/screens/recommended_movies_screen.dart';
-import 'package:hamro_cinema/widgets/general_alert_dialog.dart';
-import 'package:hamro_cinema/widgets/movie_card.dart';
-import 'package:hamro_cinema/widgets/upcoming_movie_card.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '/providers/login_provider.dart';
+import '/providers/movie_provider.dart';
+import '/providers/weather_provider.dart';
+import '/screens/list_of_theater_screen.dart';
+import '/screens/profile_screen.dart';
+import '/screens/recommended_movies_screen.dart';
 import '/utils/navigate.dart';
 import '/widgets/curved_body_widget.dart';
+import '/widgets/general_alert_dialog.dart';
+import '/widgets/movie_card.dart';
+import '/widgets/upcoming_movie_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -31,6 +29,18 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Welcome Home!"),
+        actions: [
+          if (Provider.of<WeatherProvider>(context, listen: false).weather !=
+              null)
+            Padding(
+              padding: const EdgeInsets.all(
+                16,
+              ),
+              child: Text(
+                "${Provider.of<WeatherProvider>(context, listen: false).weather!.name} ${Provider.of<WeatherProvider>(context, listen: false).weather!.main.temp.toStringAsFixed(2)} \u00B0C",
+              ),
+            ),
+        ],
       ),
       drawer: Drawer(
           child: Column(
