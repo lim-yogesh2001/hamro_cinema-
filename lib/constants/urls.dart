@@ -27,6 +27,7 @@ const showsUrl = "$baseUrl/shows-api";
 const showsListUrl = "$showsUrl/shows";
 const theaterSeatsUrl = "$showsUrl/seats";
 const reservedSeatsUrl = "$showsUrl/reserved-seats/";
+const watchedMoviesUrl = "$showsUrl/movies-watched/";
 
 const ticketUrl = "$showsUrl/tickets/";
 

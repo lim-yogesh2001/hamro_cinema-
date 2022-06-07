@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:hamro_cinema/screens/movies_watched_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -76,6 +77,14 @@ class HomeScreen extends StatelessWidget {
             context,
             label: "List of Theaters",
             widget: const ListOfTheaterScreen(),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          buildListTile(
+            context,
+            label: "Watched Movies History",
+            widget: const MoviesWatchedScreen(),
           ),
           const SizedBox(
             height: 8,

@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hamro_cinema/constants/constants.dart';
+import 'package:hamro_cinema/providers/movies_watched_provider.dart';
 import 'package:hamro_cinema/providers/review_provider.dart';
 import 'package:hamro_cinema/providers/seat_provider.dart';
 import 'package:hamro_cinema/providers/show_provider.dart';
@@ -108,6 +109,9 @@ class MyApp extends StatelessWidget {
           ),
           ChangeNotifierProvider(
             create: (_) => WeatherProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => MoviesWatchedProvider(),
           ),
         ],
         child: MaterialApp(
