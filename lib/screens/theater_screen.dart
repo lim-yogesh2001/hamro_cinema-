@@ -146,6 +146,7 @@ class TheaterScreen extends StatelessWidget {
                   itemBuilder: ((context, index) => Card(
                           child: ListTile(
                         title: Text(data[index].comment),
+                        subtitle: Text("By: ${data[index].username}"),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [

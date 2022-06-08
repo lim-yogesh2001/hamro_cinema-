@@ -14,6 +14,7 @@ class ReviewProvider extends ChangeNotifier {
     try {
       final response =
           await APICall().getRequestWithToken("$theaterReviewUrl/$id");
+      print(response);
       reviews = reviewFromJson(response);
     } catch (ex) {
       log(ex.toString());
@@ -33,7 +34,6 @@ class ReviewProvider extends ChangeNotifier {
         "user_id":
             Provider.of<LoginProvider>(context, listen: false).getUserId(),
       };
-      print(body);
       final response =
           await APICall().postRequestWithToken("$theaterReviewUrl/$id/", body);
     } catch (ex) {

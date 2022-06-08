@@ -136,19 +136,36 @@ class SeatsScreen extends StatelessWidget {
                                 .reviews;
                         return ListView.builder(
                           itemBuilder: ((context, index) => Card(
-                                  child: ListTile(
-                                title: Text(data[index].comment),
-                                trailing: Row(
-                                  mainAxisSize: MainAxisSize.min,
+                              elevation: 5,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Icon(
-                                      Icons.star_outlined,
-                                      color: Colors.orange,
+                                    Text(
+                                      "${data[index].username} reviewed this theater",
+                                      style:
+                                          Theme.of(context).textTheme.bodyText1,
                                     ),
-                                    const SizedBox(
-                                      width: 5,
+                                    ListTile(
+                                      tileColor: const Color(0xffF8F9FD),
+                                      contentPadding: EdgeInsets.zero,
+                                      title: Text(data[index].comment),
+                                      trailing: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          const Icon(
+                                            Icons.star_outlined,
+                                            color: Colors.orange,
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(data[index].ratings.toString())
+                                        ],
+                                      ),
                                     ),
-                                    Text(data[index].ratings.toString())
                                   ],
                                 ),
                               ))),
