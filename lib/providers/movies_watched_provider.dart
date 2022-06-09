@@ -12,7 +12,8 @@ class MoviesWatchedProvider extends ChangeNotifier {
   fetchWatchedMovies(int userId) async {
     try {
       final response =
-          await APICall().getRequestWithToken("$watchedMoviesUrl$userId");
+          // await APICall().getRequestWithToken("$watchedMoviesUrl$userId");
+          await APICall().getRequestWithToken("${watchedMoviesUrl}1");
       moviesWatched = moviesWatchedFromJson(response);
     } catch (ex) {
       log(ex.toString());

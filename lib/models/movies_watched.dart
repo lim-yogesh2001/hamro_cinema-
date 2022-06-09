@@ -2,9 +2,9 @@
 //
 //     final moviesWatched = moviesWatchedFromJson(jsonString);
 
-import 'dart:convert';
-
 import 'package:hamro_cinema/constants/urls.dart';
+import 'package:meta/meta.dart';
+import 'dart:convert';
 
 List<MoviesWatched> moviesWatchedFromJson(String str) =>
     List<MoviesWatched>.from(
@@ -15,28 +15,45 @@ String moviesWatchedToJson(List<MoviesWatched> data) =>
 
 class MoviesWatched {
   MoviesWatched({
-    required this.id,
     required this.movieName,
     required this.coverImage,
-    required this.genres,
+    required this.showId,
+    required this.showTime,
+    required this.date,
+    required this.theaterName,
+    required this.row,
+    required this.number,
   });
 
-  final int id;
   final String movieName;
   final String coverImage;
-  final String genres;
+  final String showId;
+  final String showTime;
+  final DateTime date;
+  final String theaterName;
+  final int row;
+  final int number;
 
   factory MoviesWatched.fromJson(Map<String, dynamic> json) => MoviesWatched(
-        id: json["id"],
         movieName: json["movie_name"],
         coverImage: baseUrl + json["cover_image"],
-        genres: json["genres"],
+        showId: json["show_id"],
+        showTime: json["show_time"],
+        date: DateTime.parse(json["date"]),
+        theaterName: json["theater_name"],
+        row: json["row"],
+        number: json["number"],
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
         "movie_name": movieName,
         "cover_image": coverImage,
-        "genres": genres,
+        "show_id": showId,
+        "show_time": showTime,
+        "date":
+            "${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}",
+        "theater_name": theaterName,
+        "row": row,
+        "number": number,
       };
 }

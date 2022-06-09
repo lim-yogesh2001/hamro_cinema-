@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:hamro_cinema/providers/login_provider.dart';
 import 'package:hamro_cinema/providers/movies_watched_provider.dart';
 import 'package:hamro_cinema/widgets/curved_body_widget.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class MoviesWatchedScreen extends StatelessWidget {
@@ -43,33 +44,94 @@ class MoviesWatchedScreen extends StatelessWidget {
                           const SizedBox(
                             height: 16,
                           ),
-                          GridView.builder(
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              childAspectRatio: 0.8,
-                            ),
+                          ListView.builder(
+                            primary: false,
                             itemCount: data.length,
                             shrinkWrap: true,
-                            itemBuilder: (context, index) => Card(
+                            itemBuilder: (context, index) =>
+                                // ListTile(
+                                //   leading: ClipRRect(
+                                //     borderRadius: BorderRadius.circular(25),
+                                //     child: Image.network(data[index].coverImage),
+                                //   ),
+                                //   title: Text(data[index].movieName),
+                                //   subtitle: Text(data[index].theaterName),
+                                //   trailing: Text(
+                                //       "Seat: ${data[index].row} ${data[index].number}"),
+                                // ),
+                                Card(
                               elevation: 5,
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child:
-                                        Image.network(data[index].coverImage),
+                                  SizedBox(
+                                    height:
+                                        MediaQuery.of(context).size.height * .2,
+                                    width:
+                                        MediaQuery.of(context).size.width * .35,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child:
+                                          Image.network(data[index].coverImage),
+                                    ),
                                   ),
-                                  const SizedBox(
-                                    height: 8,
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width * .02,
                                   ),
-                                  Expanded(
-                                    child: Text(
-                                      data[index].movieName,
-                                      style:
-                                          Theme.of(context).textTheme.bodyText1,
+                                  SizedBox(
+                                    height:
+                                        MediaQuery.of(context).size.height * .2,
+                                    width:
+                                        MediaQuery.of(context).size.width * .45,
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Flexible(
+                                          child: Text(
+                                            data[index].movieName,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1!
+                                                .copyWith(
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                          ),
+                                        ),
+                                        Flexible(
+                                          child: Text(
+                                            "Theater Name: " +
+                                                data[index].theaterName,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              .01,
+                                        ),
+                                        Flexible(
+                                          child: Text(
+                                            "Row: ${data[index].row}, Seat No: ${data[index].number}",
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              .01,
+                                        ),
+                                        Flexible(
+                                          child: Text(
+                                            "Time: ${DateFormat("yyyy-MM-dd").format(data[index].date)} ${data[index].showTime}",
+                                          ),
+                                        )
+                                      ],
                                     ),
                                   ),
                                 ],
