@@ -68,23 +68,26 @@ class LoginScreen extends StatelessWidget {
                   },
                 ),
                 const SizedBox(
-                  height: 8,
+                  height: 2,
                 ),
                 Align(
-                  alignment: Alignment.centerRight,
+                  alignment: Alignment.centerLeft,
                   child: TextButton(
                     onPressed: () => navigate(context, ForgotPasswordScreen()),
                     child: const Text("Forgot Password?"),
                   ),
                 ),
                 const SizedBox(
-                  height: 8,
+                  height: 2,
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    _submit(context, false);
-                  },
-                  child: const Text("Login"),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _submit(context, false);
+                    },
+                    child: const Text("Login"),
+                  ),
                 ),
                 const SizedBox(height: 16),
                 const Text("OR"),

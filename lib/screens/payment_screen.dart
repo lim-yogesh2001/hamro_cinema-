@@ -54,6 +54,7 @@ class PaymentScreen extends StatelessWidget {
                 height: 16,
               ),
               Card(
+                elevation: 4,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(
                     6,
@@ -64,14 +65,16 @@ class PaymentScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      DetailDisplayer(
-                        title: "Show Name",
-                        value: show.movie.movieName,
+                      FittedBox(
+                        child: DetailDisplayer(
+                          title: "Show Name: ",
+                          value: show.movie.movieName,
+                        ),
                       ),
                       DetailDisplayer(
                         title: "Show Time",
                         value:
-                            "Show Time: ${DateFormat("yyyy-MMMM-dd").format(show.date)} ${show.showTime}",
+                            "${DateFormat.yMMMEd().format(show.date)} ${show.showTime}",
                       ),
                       DetailDisplayer(
                         title: "Theater Name",

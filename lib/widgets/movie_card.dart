@@ -22,8 +22,9 @@ class MovieCard extends StatelessWidget {
         children: [
           Image.network(
             movie.coverImage,
-            height: size.height * .2,
-            width: size.width * .45,
+            height: size.height * .21,
+            width: size.width * .42,
+            fit: BoxFit.cover,
           ),
           const SizedBox(
             height: 8,
@@ -31,7 +32,7 @@ class MovieCard extends StatelessWidget {
           Text(
             movie.movieName,
             style: const TextStyle(
-              fontSize: 14,
+              fontSize: 12,
               color: Colors.black,
               fontWeight: FontWeight.bold,
             ),

@@ -89,7 +89,6 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          const Spacer(),
           buildListTile(
             context,
             label: "Log Out",

@@ -93,14 +93,16 @@ class MoviesWatchedScreen extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Flexible(
-                                          child: Text(
-                                            data[index].movieName,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1!
-                                                .copyWith(
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                          child: FittedBox(
+                                            child: Text(
+                                              data[index].movieName,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText1!
+                                                  .copyWith(
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                            ),
                                           ),
                                         ),
                                         Flexible(

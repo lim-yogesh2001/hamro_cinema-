@@ -19,7 +19,6 @@ import 'package:provider/provider.dart';
 import '/providers/login_provider.dart';
 import 'providers/movie_provider.dart';
 import '/providers/register_provider.dart';
-import '/screens/login_screen.dart';
 import '/theme/theme_data.dart';
 
 void main() async {
