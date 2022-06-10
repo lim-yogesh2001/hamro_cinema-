@@ -13,6 +13,12 @@ class MovieProvider extends ChangeNotifier {
   List<Movie> upcomingMovies = [];
   List<Movie> recommendedMovies = [];
 
+  resetMovies() {
+    listOfMovies.clear();
+    upcomingMovies.clear();
+    recommendedMovies.clear();
+  }
+
   fetchMovies() async {
     try {
       if (listOfMovies.isNotEmpty) return;

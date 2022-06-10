@@ -41,6 +41,7 @@ class LoginProvider extends ChangeNotifier {
     try {
       GeneralAlertDialog().customLoadingDialog(context);
       await APICall().postRequestWithToken(logoutUrl, {});
+      Provider.of<MovieProvider>(context, listen:false).resetMovies();
       Navigator.pop(context);
       APIClient.token = "";
       user = null;

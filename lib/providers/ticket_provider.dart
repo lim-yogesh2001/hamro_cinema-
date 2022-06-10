@@ -13,7 +13,6 @@ class TicketProvider extends ChangeNotifier {
 
   fetchTickets() async {
     try {
-      if (listOfTickets.isNotEmpty) return;
       final response = await APICall().getRequestWithToken("$ticketUrl");
       listOfTickets = ticketFromJson(response);
     } catch (ex) {

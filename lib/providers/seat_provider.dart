@@ -15,7 +15,6 @@ class SeatProvider extends ChangeNotifier {
 
   fetchSeats({required int theaterId}) async {
     try {
-      if (listOfSeats.isNotEmpty) return;
       final response =
           await APICall().getRequestWithToken("$theaterSeatsUrl/$theaterId");
       listOfSeats = seatFromJson(response);
