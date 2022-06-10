@@ -29,31 +29,38 @@ class MovieScreen extends StatelessWidget {
               width: size.width,
               child: Image.network(
                 movie.coverImage,
-                fit: BoxFit.contain,
+                fit: BoxFit.cover,
               ),
             ),
             const SizedBox(
-              height: 16,
+              height: 20,
             ),
             Text(
-              movie.descripton,
+              "Description : ${movie.descripton}",
               style: Theme.of(context).textTheme.bodyText2,
             ),
             const SizedBox(
               height: 16,
             ),
             Text(
-              "Casts: ${movie.casts}",
+              "Casts : ${movie.casts}",
               style: Theme.of(context).textTheme.bodyText2,
             ),
             const SizedBox(
               height: 16,
             ),
             Text(
-              "Release Date: ${DateFormat("yyyy-MMMM-dd").format(movie.releaseDate)}",
+              "Release Date : ${DateFormat("yyyy-MMMM-dd").format(movie.releaseDate)}",
               style: Theme.of(context).textTheme.bodyText2,
             ),
             const SizedBox(
+              height: 16,
+            ),
+             Text(
+              "Genres : ${movie.genres}",
+              style: Theme.of(context).textTheme.bodyText2,
+            ),
+             const SizedBox(
               height: 16,
             ),
             ElevatedButton(

@@ -26,7 +26,7 @@ class TheaterCard extends StatelessWidget {
         children: [
           Image.network(
             theater.logo,
-            height: size.height * .2,
+            height: size.height * .19,
             width: size.width * .45,
           ),
           const SizedBox(
