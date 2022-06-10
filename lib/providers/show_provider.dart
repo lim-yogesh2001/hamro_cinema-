@@ -11,7 +11,6 @@ class ShowProvider extends ChangeNotifier {
 
   fetchShows({required int movieId}) async {
     try {
-      if (listOfShows.isNotEmpty) return;
       final response =
           await APICall().getRequestWithToken("$showsListUrl/$movieId");
       listOfShows = showFromJson(response);
